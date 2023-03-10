@@ -1,16 +1,13 @@
 function solution(arr) {
-    let lcm = 1
+    let answer = 0
+    
+    arr.sort((a, b) => a - b)
+    
     for (let i = 0; i < arr.length; i++) {
-        lcm *= arr[i] / gcd(arr[i], lcm)
+        for (let j = i + 1; j < arr.length; j++) {
+            console.log(arr[i], arr[j])
+        }
     }
     
-    return lcm
-}
-
-function gcd (p, q) {
-    if (q === 0) {
-        return p
-    }
-    
-    return gcd(q, p % q)
+    return answer
 }

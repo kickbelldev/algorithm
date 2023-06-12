@@ -1,9 +1,11 @@
+import sys
+
 N = int(input())
 
 li = []
 
 for _ in range(N):
-    coordinate = list(map(int, input().split()))
+    coordinate = list(map(int, sys.stdin.readline().split()))
 
     li.append(coordinate)
 

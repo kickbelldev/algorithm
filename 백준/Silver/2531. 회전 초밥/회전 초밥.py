@@ -1,20 +1,16 @@
+import sys
+
 N, d, k, c = map(int, input().split())
 
 li = []
 
 for i in range(N):
-    li.append(int(input()))
-
+    li.append(int(sys.stdin.readline()))
+li = li * 2
 eat = 0
-temp = []
-for i in range(N + k):
-    a = i
-    if a >= N:
-        a -= N
-    temp.append(li[a])
 
-    if len(temp) > k:
-        temp = temp[1:]
+for i in range(N + k):
+    temp = li[i : i + k]
 
     s = set(temp)
 

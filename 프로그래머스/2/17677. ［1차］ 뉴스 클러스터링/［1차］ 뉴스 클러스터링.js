@@ -18,23 +18,18 @@ function solution (str1, str2) {
     arr1 = arr1.filter((v) => regex.test(v))
     arr2 = arr2.filter((v) => regex.test(v))
     
-    
     let interCnt = 0
-    
     let unionCnt = 0
     
-    for (let i = 0; i < arr1.length; i++) {
-        const idx = arr2.indexOf(arr1[i])
-        
-        if (~idx) {
-            interCnt++
-            arr2.splice(idx, 1)
-        }
-        
-        unionCnt++
-    }
+    const set = new Set([...arr1, ...arr2])
     
-    unionCnt += arr2.length
+    for (const item of set) {
+        const has1 = arr1.filter((x) => x === item).length
+        const has2 = arr2.filter((x) => x === item).length
+        
+        interCnt += Math.min(has1, has2)
+        unionCnt += Math.max(has1, has2)
+    }
     
     return unionCnt ? Math.floor((interCnt / unionCnt) * 65536) : 65536
 }

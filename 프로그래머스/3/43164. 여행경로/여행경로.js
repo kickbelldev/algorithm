@@ -36,13 +36,5 @@ function solution(tickets) {
     }
     
     dfs('ICN', list)
-    return result.sort((a, b) => {
-        for (let i = 1; i < tickets.length; i++) {
-            if (a[i] < b[i]) {
-                return -1
-            } else if (a[i] > b[i]){
-                return 1
-            }
-        }
-    })[0]
+    return result.sort()[0]
 }

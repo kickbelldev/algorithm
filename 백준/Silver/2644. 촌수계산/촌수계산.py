@@ -15,9 +15,7 @@ for _ in range(0, m):
     else:
         d[x] = [y]
 
-    if y in reverse:
-        pass
-    else:
+    if y not in reverse:
         reverse[y] = x
 
 
@@ -27,26 +25,23 @@ visited = [False] * (n + 1)
 
 visited[a] = True
 
-def dfs(x, cnt):
-    global answer
+queue = [(a, 0)]
+
+while queue:
+    x, cnt = queue.pop(0)
 
     if x == b:
         answer = cnt
-        return
-
+        break
 
     if x in reverse:
         if visited[reverse[x]] == False:
             visited[reverse[x]] = True
-            dfs(reverse[x], cnt + 1)
-            visited[reverse[x]] = False
+            queue.append((reverse[x], cnt + 1))
     if x in d:
         for child in d[x]:
             if visited[child] == False:
                 visited[child] = True
-                dfs(child, cnt + 1)
-                visited[child] = False
-    
-dfs(a, 0)
+                queue.append((child, cnt + 1))
 
 print(answer)

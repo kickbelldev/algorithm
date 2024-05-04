@@ -5,7 +5,6 @@ a, b = map(int, input().split())
 m = int(input())
 
 d = dict()
-reverse = dict()
 
 for _ in range(0, m):
     x, y = map(int, input().split())
@@ -15,14 +14,14 @@ for _ in range(0, m):
     else:
         d[x] = [y]
 
-    if y not in reverse:
-        reverse[y] = x
-
+    if y in d:
+        d[y].append(x)
+    else:
+        d[y] = [x]
 
 answer = -1
 
 visited = [False] * (n + 1)
-
 visited[a] = True
 
 queue = [(a, 0)]
@@ -33,11 +32,7 @@ while queue:
     if x == b:
         answer = cnt
         break
-
-    if x in reverse:
-        if visited[reverse[x]] == False:
-            visited[reverse[x]] = True
-            queue.append((reverse[x], cnt + 1))
+    
     if x in d:
         for child in d[x]:
             if visited[child] == False:

@@ -2,8 +2,6 @@ n, m = map(int, input().split())
 
 trees = list(map(int, input().split()))
 
-max_height = max(trees)
-
 
 def get_tree_cnt(height):
     cnt = 0
@@ -14,19 +12,20 @@ def get_tree_cnt(height):
     return cnt
 
 
-result = []
+ans = 0
+
+start = 0
+end = max(trees)
+
+while start <= end:
+    mid = (start + end) // 2
+    tree_cnt = get_tree_cnt(mid)
+    if tree_cnt >= m:
+        start = mid + 1
+        if ans < mid:
+            ans = mid
+    else:
+        end = mid - 1
 
 
-def binary_search(start, end):
-    while start <= end:
-        mid = (start + end) // 2
-        tree_cnt = get_tree_cnt(mid)
-        if tree_cnt >= m:
-            start = mid + 1
-            result.append(mid)
-        else:
-            end = mid - 1
-
-
-binary_search(0, max_height)
-print(max(result))
+print(ans)
